@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.sfg.petclinic</groupId>
-		<artifactId>pet-clinic</artifactId>
+		<artifactId>sfg-petclinic</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>pet-clinic-data</artifactId>
-	<name>pet-clinic-data</name>
+	<artifactId>sfg-petclinic-data</artifactId>
+	<name>sfg-petclinic-data</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
