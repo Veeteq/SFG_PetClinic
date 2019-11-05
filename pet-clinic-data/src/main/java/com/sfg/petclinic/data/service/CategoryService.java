@@ -1,13 +1,8 @@
 package com.sfg.petclinic.data.service;
 
-import java.util.List;
-
 import com.sfg.petclinic.data.model.Category;
 
-public interface CategoryService {
+public interface CategoryService extends CrudService<Category, Long>{
 
-    List<Category> findAll();
-    Category findById(Long id);
-    Category save(Category pet);
-    Category findByLastName(String name);
+    Category findByName(String name);
 }

@@ -2,8 +2,10 @@ package com.sfg.petclinic.data.model;
 
 import java.time.LocalDate;
 
-public class Pet {
+public class Pet extends NamedEntity {
 
+    private static final long serialVersionUID = 1L;
+    
     private LocalDate birthDate;
     private Owner owner;
     private PetType petType;
