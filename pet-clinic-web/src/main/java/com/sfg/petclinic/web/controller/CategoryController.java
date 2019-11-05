@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(path = "/categories")
 public class CategoryController {
 
-    @RequestMapping(path = {"/categories", "/categories/index", "/categories/index.html"}, method = RequestMethod.GET)
+    @RequestMapping(path = {"", "/", "/index", "/index.html"}, method = RequestMethod.GET)
     public String getVets() {
         return "categories/index"; 
     }
