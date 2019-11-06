@@ -2,9 +2,12 @@ package com.sfg.petclinic.data.service.map;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.sfg.petclinic.data.model.Pet;
 import com.sfg.petclinic.data.service.PetService;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
@@ -18,8 +21,8 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
     }
 
     @Override
-    public Pet save(Long id, Pet pet) {
-        return super.save(id, pet);
+    public Pet save(Pet pet) {
+        return super.save(pet);
     }
 
     @Override
@@ -30,11 +33,6 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
     @Override
     public void delete(Pet pet) {
         super.delete(pet);
-    }
-
-    @Override
-    public Pet save(Pet pet) {
-        return super.save(pet.getId(), pet);
     }
 
     @Override

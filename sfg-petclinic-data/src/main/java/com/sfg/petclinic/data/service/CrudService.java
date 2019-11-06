@@ -2,7 +2,9 @@ package com.sfg.petclinic.data.service;
 
 import java.util.Set;
 
-public interface CrudService<T, ID> {
+import com.sfg.petclinic.data.model.BaseEntity;
+
+public interface CrudService<T extends BaseEntity, ID extends Number> {
 
     Set<T> findAll();
     T findById(ID id);

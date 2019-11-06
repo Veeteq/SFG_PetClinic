@@ -6,21 +6,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.sfg.petclinic.data.model.Category;
 import com.sfg.petclinic.data.model.CategoryType;
 import com.sfg.petclinic.data.service.CategoryService;
-import com.sfg.petclinic.data.service.map.CategoryServiceMap;
 
 @Component
 public class BudgetDataLoader implements CommandLineRunner {
 
     private final CategoryService categoryService;
     
-    public BudgetDataLoader() {
-        this.categoryService = new CategoryServiceMap();
+    @Autowired
+    public BudgetDataLoader(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @Override

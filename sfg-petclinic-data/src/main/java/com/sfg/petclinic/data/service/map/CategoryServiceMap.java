@@ -2,9 +2,12 @@ package com.sfg.petclinic.data.service.map;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.sfg.petclinic.data.model.Category;
 import com.sfg.petclinic.data.service.CategoryService;
 
+@Service
 public class CategoryServiceMap extends AbstractMapService<Category, Long> implements CategoryService {
 
     @Override
@@ -18,8 +21,8 @@ public class CategoryServiceMap extends AbstractMapService<Category, Long> imple
     }
 
     @Override
-    public Category save(Long id, Category category) {
-        return super.save(id, category);
+    public Category save(Category category) {
+        return super.save(category);
     }
 
     @Override
@@ -30,11 +33,6 @@ public class CategoryServiceMap extends AbstractMapService<Category, Long> imple
     @Override
     public void delete(Category category) {
         super.delete(category);
-    }
-
-    @Override
-    public Category save(Category category) {
-        return super.save(category.getId(), category);
     }
 
     @Override

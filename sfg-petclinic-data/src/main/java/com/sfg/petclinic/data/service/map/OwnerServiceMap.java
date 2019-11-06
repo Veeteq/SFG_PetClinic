@@ -2,9 +2,12 @@ package com.sfg.petclinic.data.service.map;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.sfg.petclinic.data.model.Owner;
 import com.sfg.petclinic.data.service.OwnerService;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
@@ -18,8 +21,8 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     }
 
     @Override
-    public Owner save(Long id, Owner owner) {
-        return super.save(id, owner);
+    public Owner save(Owner owner) {
+        return super.save(owner);
     }
 
     @Override
@@ -30,11 +33,6 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public void delete(Owner owner) {
         super.delete(owner);
-    }
-
-    @Override
-    public Owner save(Owner owner) {
-        return super.save(owner.getId(), owner);
     }
 
     @Override
