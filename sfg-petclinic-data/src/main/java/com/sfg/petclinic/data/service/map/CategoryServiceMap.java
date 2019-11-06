@@ -2,24 +2,24 @@ package com.sfg.petclinic.data.service.map;
 
 import java.util.Set;
 
-import com.sfg.petclinic.data.model.Vet;
-import com.sfg.petclinic.data.service.CrudService;
+import com.sfg.petclinic.data.model.Category;
+import com.sfg.petclinic.data.service.CategoryService;
 
-public class CategoryServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class CategoryServiceMap extends AbstractMapService<Category, Long> implements CategoryService {
 
     @Override
-    public Set<Vet> findAll() {
+    public Set<Category> findAll() {
         return super.findAll();
     }
 
     @Override
-    public Vet findById(Long id) {
+    public Category findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Vet save(Long id, Vet vet) {
-        return super.save(id, vet);
+    public Category save(Long id, Category category) {
+        return super.save(id, category);
     }
 
     @Override
@@ -28,12 +28,17 @@ public class CategoryServiceMap extends AbstractMapService<Vet, Long> implements
     }
 
     @Override
-    public void delete(Vet vet) {
-        super.delete(vet);
+    public void delete(Category category) {
+        super.delete(category);
     }
 
     @Override
-    public Vet save(Vet vet) {
-        return super.save(vet.getId(), vet);
+    public Category save(Category category) {
+        return super.save(category.getId(), category);
+    }
+
+    @Override
+    public Category findByName(String name) {
+        return null;
     }
 }

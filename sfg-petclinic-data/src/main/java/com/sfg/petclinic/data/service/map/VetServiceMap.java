@@ -3,9 +3,9 @@ package com.sfg.petclinic.data.service.map;
 import java.util.Set;
 
 import com.sfg.petclinic.data.model.Vet;
-import com.sfg.petclinic.data.service.CrudService;
+import com.sfg.petclinic.data.service.VetService;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
     @Override
     public Set<Vet> findAll() {
@@ -35,5 +35,10 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements Crud
     @Override
     public Vet save(Vet vet) {
         return super.save(vet.getId(), vet);
+    }
+
+    @Override
+    public Vet findByLastName(String lastName) {
+        return null;
     }
 }

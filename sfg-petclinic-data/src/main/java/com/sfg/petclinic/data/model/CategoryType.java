@@ -2,9 +2,9 @@ package com.sfg.petclinic.data.model;
 
 public enum CategoryType {
 
-    EXP(1, "Expense"),
-    INC(2, "Income"),
-    BOTH(3, "Both");
+    Exp(1, "Expense"),
+    Inc(2, "Income"),
+    Both(3, "Both");
 
     private int id;
     private String description;
