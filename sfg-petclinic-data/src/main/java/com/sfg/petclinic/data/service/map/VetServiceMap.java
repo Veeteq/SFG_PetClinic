@@ -1,38 +1,30 @@
 package com.sfg.petclinic.data.service.map;
 
-import java.util.Set;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sfg.petclinic.data.model.Vet;
+import com.sfg.petclinic.data.service.SpecialityService;
 import com.sfg.petclinic.data.service.VetService;
 
 @Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
-    @Override
-    public Set<Vet> findAll() {
-        return super.findAll();
-    }
-
-    @Override
-    public Vet findById(Long id) {
-        return super.findById(id);
+    private final SpecialityService specialityService;
+    
+    @Autowired
+    public VetServiceMap(SpecialityService specialityService) {
+        this.specialityService = specialityService;
     }
 
     @Override
     public Vet save(Vet vet) {
+        vet.getSpecialities().forEach(speciality -> {
+            if(speciality.getId() == null) {
+                speciality.setId(specialityService.save(speciality).getId());
+            }
+        });
         return super.save(vet);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
-
-    @Override
-    public void delete(Vet vet) {
-        super.delete(vet);
     }
 
     @Override
