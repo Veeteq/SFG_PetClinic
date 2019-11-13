@@ -1,6 +1,9 @@
 package com.sfg.petclinic.data.model;
 
-public class NamedEntity extends BaseEntity {
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class NamedEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
     
