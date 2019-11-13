@@ -30,7 +30,8 @@ public class BudgetDataLoader implements CommandLineRunner {
     }
 
     private void loadCategories() {
-        String file = "C:\\Users\\la289dm\\Downloads\\incomes\\categories.txt";
+        //String file = "C:\\Users\\la289dm\\Downloads\\incomes\\categories.txt";
+    	String file = "F:\\categories.txt";
         getStreamFromFile(file).forEach(line -> {
             String[] values = line.split("\t");
             Category category = new Category();
