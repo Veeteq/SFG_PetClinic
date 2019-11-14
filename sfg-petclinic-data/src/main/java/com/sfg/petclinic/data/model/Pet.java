@@ -10,13 +10,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="pets")
 @AttributeOverride(name = "id", column = @Column(name = "pet_id"))
 @SequenceGenerator(name="default_seq", sequenceName="pet_seq", allocationSize=1)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Pet extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
+
+    @Builder
+    public Pet(String name) {
+        super(name);
+    }
     
     @Column(name = "birth_date")
     private LocalDate birthDate;
@@ -28,28 +44,4 @@ public class Pet extends NamedEntity {
     @ManyToOne
     @JoinColumn(name = "pet_type_id")
     private PetType petType;
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    public PetType getPetType() {
-        return petType;
-    }
-
-    public void setPetType(PetType petType) {
-        this.petType = petType;
-    }
 }

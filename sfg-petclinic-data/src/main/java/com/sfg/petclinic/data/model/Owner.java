@@ -11,14 +11,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="owners")
 @AttributeOverride(name = "id", column = @Column(name = "owner_id"))
 @SequenceGenerator(name="default_seq", sequenceName="owner_seq", allocationSize=1)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Owner extends Person {
 
     private static final long serialVersionUID = 1L;
 
+    @Builder
+    public Owner(String firstName, String lastName) {
+        super(firstName, lastName);
+    }
+    
     @Column(name = "address")
     private String address;
     
@@ -28,38 +44,11 @@ public class Owner extends Person {
     @Column(name = "phone")
     private String phone;
     
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Set<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(Set<Pet> pets) {
-        this.pets = pets;
+    public void addPet(Pet pet) {
+        this.pets.add(pet);
     }
 }

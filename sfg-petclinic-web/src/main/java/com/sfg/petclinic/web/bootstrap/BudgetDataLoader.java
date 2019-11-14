@@ -18,7 +18,10 @@ import com.sfg.petclinic.data.service.CategoryService;
 import com.sfg.petclinic.data.service.ItemService;
 import com.sfg.petclinic.data.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class BudgetDataLoader implements CommandLineRunner {
 
     private final static Path baseDirectory = Paths.get("C:\\Users\\la289dm\\Downloads\\incomes");
@@ -46,13 +49,14 @@ public class BudgetDataLoader implements CommandLineRunner {
     	//String file = "F:\\categories.txt";
         getStreamFromFile(path).forEach(line -> {
             String[] values = line.split("\t");
-            Category category = new Category();
-            category.setId(Long.valueOf(values[0]));
-            category.setName(values[1]);
-            category.setType(CategoryType.valueOf(values[2]));
+            Category category = Category.builder()
+            .id(Long.valueOf(values[0]))
+            .name(values[1])
+            .categoryType(CategoryType.valueOf(values[2]))
+            .build();
             categoryService.save(category);
         });      
-        System.out.println("Categories loaded...");
+        log.debug("Categories loaded...");
     }
 
     private void loadItems() {
@@ -60,25 +64,27 @@ public class BudgetDataLoader implements CommandLineRunner {
         //String file = "F:\\categories.txt";
         getStreamFromFile(path).forEach(line -> {
             String[] values = line.split("\t");
-            Item item = new Item();
-            item.setId(Long.valueOf(values[0]));
-            item.setCategory(categoryService.findById(Long.parseLong(values[1])));
-            item.setName(values[2]);
+            Item item = Item.builder()
+            .id(Long.valueOf(values[0]))
+            .category(categoryService.findById(Long.parseLong(values[1])))
+            .name(values[2])
+            .build();
             itemService.save(item);
         });      
-        System.out.println("Items loaded...");
+        log.debug("Items loaded...");
     }
 
     private void loadUsers() {
         Path path = baseDirectory.resolve("users.txt");
         getStreamFromFile(path).forEach(line -> {
             String[] values = line.split("\t");
-            User user = new User();
-            user.setId(Long.valueOf(values[0]));
-            user.setName(values[1]);
+            User user = User.builder()
+            .id(Long.valueOf(values[0]))
+            .name(values[1])
+            .build();
             userService.save(user);
         });      
-        System.out.println("Users loaded...");
+        log.debug("Users loaded...");
     }
     
     private Stream<String> getStreamFromFile(Path path){
