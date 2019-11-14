@@ -12,27 +12,39 @@ import org.springframework.stereotype.Component;
 
 import com.sfg.petclinic.data.model.Category;
 import com.sfg.petclinic.data.model.CategoryType;
+import com.sfg.petclinic.data.model.Item;
+import com.sfg.petclinic.data.model.User;
 import com.sfg.petclinic.data.service.CategoryService;
+import com.sfg.petclinic.data.service.ItemService;
+import com.sfg.petclinic.data.service.UserService;
 
 @Component
 public class BudgetDataLoader implements CommandLineRunner {
 
+    private final static Path baseDirectory = Paths.get("C:\\Users\\la289dm\\Downloads\\incomes");
+    
     private final CategoryService categoryService;
+    private final ItemService itemService;
+    private final UserService userService;
     
     @Autowired
-    public BudgetDataLoader(CategoryService categoryService) {
+    public BudgetDataLoader(CategoryService categoryService, ItemService itemService, UserService userService) {
         this.categoryService = categoryService;
+        this.itemService = itemService;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) throws Exception {
         loadCategories();
+        loadItems();
+        loadUsers();
     }
 
     private void loadCategories() {
-        //String file = "C:\\Users\\la289dm\\Downloads\\incomes\\categories.txt";
-    	String file = "F:\\categories.txt";
-        getStreamFromFile(file).forEach(line -> {
+        Path path = baseDirectory.resolve("categories.txt");
+    	//String file = "F:\\categories.txt";
+        getStreamFromFile(path).forEach(line -> {
             String[] values = line.split("\t");
             Category category = new Category();
             category.setId(Long.valueOf(values[0]));
@@ -43,9 +55,34 @@ public class BudgetDataLoader implements CommandLineRunner {
         System.out.println("Categories loaded...");
     }
 
-    private Stream<String> getStreamFromFile(String file){
+    private void loadItems() {
+        Path path = baseDirectory.resolve("items.txt");
+        //String file = "F:\\categories.txt";
+        getStreamFromFile(path).forEach(line -> {
+            String[] values = line.split("\t");
+            Item item = new Item();
+            item.setId(Long.valueOf(values[0]));
+            item.setCategory(categoryService.findById(Long.parseLong(values[1])));
+            item.setName(values[2]);
+            itemService.save(item);
+        });      
+        System.out.println("Items loaded...");
+    }
+
+    private void loadUsers() {
+        Path path = baseDirectory.resolve("users.txt");
+        getStreamFromFile(path).forEach(line -> {
+            String[] values = line.split("\t");
+            User user = new User();
+            user.setId(Long.valueOf(values[0]));
+            user.setName(values[1]);
+            userService.save(user);
+        });      
+        System.out.println("Users loaded...");
+    }
+    
+    private Stream<String> getStreamFromFile(Path path){
         try {
-            Path path = Paths.get(file);
             return Files.lines(path);
         } catch (IOException e) {
             e.printStackTrace();

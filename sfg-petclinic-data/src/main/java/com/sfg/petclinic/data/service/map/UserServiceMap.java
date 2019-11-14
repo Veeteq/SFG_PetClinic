@@ -5,26 +5,26 @@ import java.util.Set;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.sfg.petclinic.data.model.Category;
-import com.sfg.petclinic.data.service.CategoryService;
+import com.sfg.petclinic.data.model.User;
+import com.sfg.petclinic.data.service.UserService;
 
 @Service
 @Profile(value = {"default","map"})
-public class CategoryServiceMap extends AbstractMapService<Category, Long> implements CategoryService {
+public class UserServiceMap extends AbstractMapService<User, Long> implements UserService {
 
     @Override
-    public Set<Category> findAll() {
+    public Set<User> findAll() {
         return super.findAll();
     }
 
     @Override
-    public Category findById(Long id) {
+    public User findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Category save(Category category) {
-        return super.save(category);
+    public User save(User user) {
+        return super.save(user);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class CategoryServiceMap extends AbstractMapService<Category, Long> imple
     }
 
     @Override
-    public void delete(Category category) {
-        super.delete(category);
+    public void delete(User user) {
+        super.delete(user);
     }
 
     @Override
-    public Category findByName(String name) {
+    public User findByName(String name) {
         return null;
     }
 }

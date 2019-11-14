@@ -11,10 +11,12 @@ import com.sfg.petclinic.data.model.Pet;
 import com.sfg.petclinic.data.model.PetType;
 import com.sfg.petclinic.data.model.Speciality;
 import com.sfg.petclinic.data.model.Vet;
+import com.sfg.petclinic.data.model.Visit;
 import com.sfg.petclinic.data.service.OwnerService;
 import com.sfg.petclinic.data.service.PetTypeService;
 import com.sfg.petclinic.data.service.SpecialityService;
 import com.sfg.petclinic.data.service.VetService;
+import com.sfg.petclinic.data.service.VisitService;
 
 @Component
 public class PetClinicDataLoader implements CommandLineRunner {
@@ -23,9 +25,11 @@ public class PetClinicDataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     @Autowired
-    public PetClinicDataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public PetClinicDataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
+        this.visitService = visitService;
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
@@ -113,5 +117,13 @@ public class PetClinicDataLoader implements CommandLineRunner {
         vetService.save(vet2);
         
         System.out.println("Vets loaded...");
+        
+        Visit michaelsPetVisit = new Visit();
+        michaelsPetVisit.setPet(michaelsPet);
+        michaelsPetVisit.setDescription("Broken leg");
+        michaelsPetVisit.setDate(LocalDate.now());
+        visitService.save(michaelsPetVisit);
+        
+        System.out.println("Visit loaded...");
     }
 }
