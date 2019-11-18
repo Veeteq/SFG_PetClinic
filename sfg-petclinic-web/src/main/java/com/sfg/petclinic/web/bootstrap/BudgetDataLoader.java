@@ -39,9 +39,11 @@ public class BudgetDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        loadCategories();
-        loadItems();
-        loadUsers();
+        if(Files.exists(baseDirectory)) {
+            loadCategories();
+            loadItems();
+            loadUsers();
+        }
     }
 
     private void loadCategories() {
