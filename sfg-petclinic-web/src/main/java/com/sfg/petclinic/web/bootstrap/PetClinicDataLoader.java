@@ -1,6 +1,7 @@
 package com.sfg.petclinic.web.bootstrap;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -71,6 +72,7 @@ public class PetClinicDataLoader implements CommandLineRunner {
         .address("123 Brickerel")
         .city("Miami")
         .phone("1231231234")
+        .pets(new HashSet<>())
         .build();
         
         Pet michaelsPet = Pet.builder()
@@ -88,6 +90,7 @@ public class PetClinicDataLoader implements CommandLineRunner {
         .address("55 Sunser Boulevard")
         .city("Los Angeles")
         .phone("55145145145")
+        .pets(new HashSet<>())
         .build();
         
         Pet eltonsPet = Pet.builder()
@@ -107,16 +110,19 @@ public class PetClinicDataLoader implements CommandLineRunner {
 
         log.debug("Owners loaded...");
         
-        Vet vet1 = Vet.builder()
+        Vet vet1 = Vet.builder()        		
         .firstName("Bruce")
         .lastName("Willis")
+        .specialities(new HashSet<>())
         .build();
+        System.out.println("getFirstName: " + vet1.getFirstName());
         vet1.getSpecialities().add(radiology);
         vetService.save(vet1);
         
         Vet vet2 = Vet.builder()
         .firstName("Angelina")
         .lastName("Jolie")
+        .specialities(new HashSet<>())
         .build();
         vet2.getSpecialities().add(surgery);
         vetService.save(vet2);

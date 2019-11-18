@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="pet_types")
@@ -17,14 +16,9 @@ import lombok.Setter;
 @SequenceGenerator(name="default_seq", sequenceName="pet_type_seq", allocationSize=1)
 @Getter
 @Setter
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class PetType extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
     
-    @Builder
-    public PetType(String name) {
-        super(name);
-    }
 }
