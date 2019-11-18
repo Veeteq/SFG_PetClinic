@@ -8,3 +8,5 @@ mvnw spring-boot:run -Dspring-boot.run.arguments=--debug
 
 1. ./mvnw release:prepare
 2. ./mvnw release:perform
+
+# Including Circle CI
