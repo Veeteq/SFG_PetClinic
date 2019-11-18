@@ -11,10 +11,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="pets")
@@ -24,12 +24,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Pet extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Builder
     public Pet(String name) {
         super(name);
     }

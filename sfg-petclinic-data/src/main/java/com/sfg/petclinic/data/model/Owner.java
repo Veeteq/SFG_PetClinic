@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="owners")
@@ -25,13 +26,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Owner extends Person {
 
     private static final long serialVersionUID = 1L;
 
-    @Builder
-    public Owner(String firstName, String lastName) {
+    @SuppressWarnings("unused")
+    private Owner(String firstName, String lastName) {
         super(firstName, lastName);
     }
     

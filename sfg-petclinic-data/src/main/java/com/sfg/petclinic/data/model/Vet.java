@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="vets")
@@ -27,12 +28,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Vet extends Person {
 
     private static final long serialVersionUID = 1L;
 
-    @Builder
     public Vet(String firstName, String lastName) {
         super(firstName, lastName);
     }

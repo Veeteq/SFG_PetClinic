@@ -12,8 +12,11 @@ import com.sfg.petclinic.data.model.Category;
 import com.sfg.petclinic.data.repository.CategoryRepository;
 import com.sfg.petclinic.data.service.CategoryService;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
 @Profile("jpa")
+@Log4j2
 public class CategoryServiceJpa implements CategoryService {
 
 	private final CategoryRepository categoryRepository;
@@ -32,6 +35,7 @@ public class CategoryServiceJpa implements CategoryService {
 
 	@Override
 	public Category findById(Long id) {
+	    log.info("CategoryServiceJpa: findById: " + id);
 		Optional<Category> optional = categoryRepository.findById(id);
 		return optional.orElse(null);
 	}
