@@ -28,10 +28,6 @@ public class Category extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
     
-    public Category(Long id, String name) {
-        super(id, name);
-    }
-    
     @Column(name = "cate_type_tx")
     @Enumerated(value = EnumType.STRING)
     private CategoryType categoryType;
