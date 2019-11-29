@@ -24,15 +24,19 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Item extends NamedEntity {
+public class Item extends NamedEntity implements Comparable<Item> {
 
     private static final long serialVersionUID = 1L;
+    
+    @ManyToOne
+    @JoinColumn(name="cate_id", nullable=false)
+    private Category category;
 
-    public Item(Long id, String name) {
-        super(id, name);
+    @Override
+    public int compareTo(Item other) {
+        if(other != null) {
+            return this.getId().compareTo(other.getId());
+        }
+        return -1;
     }
-
-	@ManyToOne
-	@JoinColumn(name="cate_id")
-	private Category category;
 }

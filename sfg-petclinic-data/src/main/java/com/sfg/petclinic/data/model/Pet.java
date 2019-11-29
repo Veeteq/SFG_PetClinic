@@ -1,16 +1,21 @@
 package com.sfg.petclinic.data.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,10 +34,6 @@ public class Pet extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
 
-    public Pet(String name) {
-        super(name);
-    }
-    
     @Column(name = "birth_date")
     private LocalDate birthDate;
     
@@ -43,4 +44,8 @@ public class Pet extends NamedEntity {
     @ManyToOne
     @JoinColumn(name = "pet_type_id")
     private PetType petType;
+    
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 }

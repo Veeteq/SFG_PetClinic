@@ -21,11 +21,7 @@ public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public BaseEntity(Long id) {
-        this.id = id;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="default_seq")
     private Long id;
 }

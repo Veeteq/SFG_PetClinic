@@ -1,7 +1,11 @@
 package com.sfg.petclinic.web.controller;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,6 +36,8 @@ class OwnerControllerTest {
     @InjectMocks
     private OwnerController ownerController;
     
+    private Owner owner1;
+    private Owner owner2;
     private Set<Owner> owners;
     private MockMvc mockMvc;
 
@@ -40,9 +46,12 @@ class OwnerControllerTest {
     
     @BeforeEach
     void setUp() throws Exception {
+        owner1 = Owner.builder().id(ownerId1).lastName("Ford").build();
+        owner2 = Owner.builder().id(ownerId2).lastName("Ford").build();
+        
         owners = new HashSet<>();
-        owners.add(Owner.builder().id(ownerId1).lastName("Ford").build());
-        owners.add(Owner.builder().id(ownerId2).lastName("Roberts").build());
+        owners.add(owner1);
+        owners.add(owner2);
         
         mockMvc = MockMvcBuilders
                 .standaloneSetup(ownerController)
@@ -72,4 +81,18 @@ class OwnerControllerTest {
 
         Mockito.verifyZeroInteractions(ownerService);
     }
+    
+    @Test
+    void testShowOwners() throws Exception {
+        //when
+        when(ownerService.findById(anyLong())).thenReturn(owner1);
+        
+        //then
+        mockMvc.perform(get("/owners/2"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/ownerDetails"))
+        .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
+        
+        Mockito.verify(ownerService, Mockito.times(1)).findById(anyLong());
+    }    
 }
