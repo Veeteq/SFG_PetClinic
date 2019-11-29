@@ -7,9 +7,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="specialities")
@@ -18,13 +18,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Speciality extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Builder
-    public Speciality(String name) {
-        super(name);
-    }    
 }

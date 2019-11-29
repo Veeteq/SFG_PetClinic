@@ -7,6 +7,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -16,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(name="default_seq", sequenceName="pet_type_seq", allocationSize=1)
 @Getter
 @Setter
+@NoArgsConstructor
 @SuperBuilder
 public class PetType extends NamedEntity {
 

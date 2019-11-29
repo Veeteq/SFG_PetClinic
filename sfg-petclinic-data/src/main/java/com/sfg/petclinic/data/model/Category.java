@@ -1,10 +1,13 @@
 package com.sfg.petclinic.data.model;
 
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,8 +30,12 @@ import lombok.experimental.SuperBuilder;
 public class Category extends NamedEntity {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Column(name = "cate_type_tx")
     @Enumerated(value = EnumType.STRING)
     private CategoryType categoryType;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Item> items;
+
 }
