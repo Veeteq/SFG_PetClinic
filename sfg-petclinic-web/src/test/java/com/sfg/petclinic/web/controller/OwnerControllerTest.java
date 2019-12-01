@@ -2,10 +2,14 @@ package com.sfg.petclinic.web.controller;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -117,5 +121,24 @@ class OwnerControllerTest {
         .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
         
         Mockito.verify(ownerService, Mockito.times(1)).findById(anyLong());
-    }    
+    }
+    
+    @Test
+    void testNewOwnerForm() throws Exception {
+        mockMvc.perform(get("/owners/new"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/addOrUpdate"))
+        .andExpect(model().attributeExists("owner"))
+        .andExpect(model().attribute("owner", instanceOf(Owner.class)));
+        
+        verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    void testUpdateOwnerForm() throws Exception {
+        mockMvc.perform(get("/owners/3/edit"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/addOrUpdate"))
+        .andExpect(model().attributeExists("owner"));
+    }
 }
