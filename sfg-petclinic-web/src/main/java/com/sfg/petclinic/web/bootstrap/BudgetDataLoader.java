@@ -19,6 +19,7 @@ import com.sfg.petclinic.data.model.Income;
 import com.sfg.petclinic.data.model.Item;
 import com.sfg.petclinic.data.model.User;
 import com.sfg.petclinic.data.service.CategoryService;
+import com.sfg.petclinic.data.service.ExpenseService;
 import com.sfg.petclinic.data.service.IncomeService;
 import com.sfg.petclinic.data.service.ItemService;
 import com.sfg.petclinic.data.service.UserService;
@@ -31,19 +32,21 @@ import lombok.extern.slf4j.Slf4j;
 public class BudgetDataLoader implements CommandLineRunner {
 
     private final static Path baseDirectory = Paths.get("C:\\Users\\la289dm\\Downloads\\incomes");
-    // private final static Path baseDirectory = Paths.get("F:");
+    //private final static Path baseDirectory = Paths.get("F:");
 
     private final CategoryService categoryService;
     private final ItemService itemService;
     private final UserService userService;
     private final IncomeService incomeService;
+    private final ExpenseService expenseService;
     
     @Autowired
-    public BudgetDataLoader(CategoryService categoryService, ItemService itemService, UserService userService, IncomeService incomeService) {
+    public BudgetDataLoader(CategoryService categoryService, ItemService itemService, UserService userService, IncomeService incomeService, ExpenseService expenseService) {
         this.categoryService = categoryService;
         this.itemService = itemService;
         this.userService = userService;
         this.incomeService = incomeService;
+        this.expenseService = expenseService;
     }
 
     @Override
@@ -142,12 +145,12 @@ public class BudgetDataLoader implements CommandLineRunner {
                         .build();
                 expense.setId(Long.valueOf(values[0]));
                 try {
-                    //expenseService.save(expense);
+                    expenseService.save(expense);
                 } catch (DataAccessException exc) {
                     log.error("Error during loading record: " + line);
                 }
             });
-            log.debug("Incomes loaded...");
+            log.debug("Expenses loaded...");
         }
     }
 

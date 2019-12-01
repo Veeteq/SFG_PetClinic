@@ -1,11 +1,11 @@
 package com.sfg.petclinic.web.controller;
 
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.anyLong;
-
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,6 +13,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +49,7 @@ class OwnerControllerTest {
     @BeforeEach
     void setUp() throws Exception {
         owner1 = Owner.builder().id(ownerId1).lastName("Ford").build();
-        owner2 = Owner.builder().id(ownerId2).lastName("Ford").build();
+        owner2 = Owner.builder().id(ownerId2).lastName("Mustang").build();
         
         owners = new HashSet<>();
         owners.add(owner1);
@@ -57,7 +59,7 @@ class OwnerControllerTest {
                 .standaloneSetup(ownerController)
                 .build();
     }
-
+/*
     @Test
     void testGetOwners() throws Exception {
         //when
@@ -71,15 +73,36 @@ class OwnerControllerTest {
         
         Mockito.verify(ownerService, Mockito.times(1)).findAll();
     }
-
+*/
     @Test
-    void testFindOwners() throws Exception {
+    void testFindOwnersForm() throws Exception {
         //then
         mockMvc.perform(get("/owners/find"))
         .andExpect(status().isOk())
-        .andExpect(view().name("notimplemented"));
+        .andExpect(view().name("owners/findOwners"))
+        .andExpect(model().attributeExists("owner"));
 
         Mockito.verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    void testFindOwnerReultForMany() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(owners);
+        
+        mockMvc.perform(get("/owners"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/ownersList"))
+        .andExpect(model().attribute("owners", hasSize(2)));
+    }
+    
+    @Test
+    void testFindOwnerReultForOne() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Stream.of(owner1).collect(Collectors.toSet()));
+
+        mockMvc.perform(get("/owners"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/owners/1"))
+        .andExpect(model().attributeExists("owner"));
     }
     
     @Test
