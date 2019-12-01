@@ -108,6 +108,12 @@ public class PetClinicDataLoader implements CommandLineRunner {
         .build();
         ownerService.save(owner3);
 
+        Owner owner4 = Owner.builder()
+        .firstName("Samuel L.")
+        .lastName("Jackson")
+        .build();
+        ownerService.save(owner4);
+
         log.debug("Owners loaded...");
         
         Vet vet1 = Vet.builder()        		

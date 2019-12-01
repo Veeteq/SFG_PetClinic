@@ -1,5 +1,8 @@
 package com.sfg.petclinic.data.service.map;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -54,4 +57,11 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public Set<Owner> findAllByLastNameLike(String lastName) {
+        return map.values()
+                .stream()
+                .filter(owner -> owner.getLastName().contains(lastName)).collect(Collectors.toSet());
+        }
 }
