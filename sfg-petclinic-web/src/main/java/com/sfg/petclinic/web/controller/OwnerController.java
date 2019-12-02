@@ -77,7 +77,7 @@ public class OwnerController {
     }
     
     @GetMapping(path = {"/{ownerId}"})
-    public ModelAndView showOwners(@PathVariable(name = "ownerId") Long ownerId) {
+    public ModelAndView showOwnerById(@PathVariable(name = "ownerId") Long ownerId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("owners/ownerDetails");
         modelAndView.addObject(ownerService.findById(ownerId));
@@ -86,7 +86,7 @@ public class OwnerController {
     }
     
     @GetMapping(path = "/new")
-    public String newOwnerForm(Model model) {
+    public String newOwnerFormShow(Model model) {
         model.addAttribute("owner", Owner.builder().build());
         return "owners/addOrUpdate";
     }
@@ -102,7 +102,7 @@ public class OwnerController {
     }
     
     @GetMapping(path = "/{ownerId}/edit")
-    public String editOwnerForm(@PathVariable(name = "ownerId") Long ownerId, Model model) {
+    public String editOwnerFormShow(@PathVariable(name = "ownerId") Long ownerId, Model model) {
         Owner owner = ownerService.findById(ownerId);
         model.addAttribute("owner", owner);
         return "owners/addOrUpdate";
