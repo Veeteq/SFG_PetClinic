@@ -148,7 +148,7 @@ class OwnerControllerTest {
     
     @Test
     void testEditOwnerFormPost() throws Exception {
-when(ownerService.save(any(Owner.class))).thenReturn(owner1);
+        when(ownerService.save(any(Owner.class))).thenReturn(owner1);
         
         mockMvc.perform(post("/owners/1/edit"))
         .andExpect(status().is3xxRedirection())

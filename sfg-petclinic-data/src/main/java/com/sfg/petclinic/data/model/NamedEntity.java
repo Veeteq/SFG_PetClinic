@@ -18,4 +18,8 @@ public abstract class NamedEntity extends BaseEntity {
 
     private String name;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
