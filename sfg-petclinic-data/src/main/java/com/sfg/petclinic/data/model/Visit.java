@@ -11,7 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="visits")
@@ -19,6 +21,8 @@ import lombok.Setter;
 @SequenceGenerator(name="default_seq", sequenceName="visit_seq", allocationSize=1)
 @Getter
 @Setter
+@NoArgsConstructor
+@SuperBuilder
 public class Visit extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
