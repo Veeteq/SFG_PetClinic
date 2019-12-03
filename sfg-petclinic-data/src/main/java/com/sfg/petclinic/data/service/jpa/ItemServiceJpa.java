@@ -1,8 +1,8 @@
 package com.sfg.petclinic.data.service.jpa;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -12,7 +12,10 @@ import com.sfg.petclinic.data.model.Item;
 import com.sfg.petclinic.data.repository.ItemRepository;
 import com.sfg.petclinic.data.service.ItemService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 @Profile("jpa")
 public class ItemServiceJpa implements ItemService {
 
@@ -25,9 +28,12 @@ public class ItemServiceJpa implements ItemService {
 
 	@Override
 	public Set<Item> findAll() {
-		Set<Item> items = new HashSet<>();
-		itemRepository.findAll().iterator().forEachRemaining(items::add);;
-		return items;
+        log.debug("ItemService: findAll");
+        Set<Item> items = new TreeSet<>();
+
+        itemRepository.findAllByOrderById().iterator().forEachRemaining(items::add);
+
+        return items;
 	}
 
 	@Override

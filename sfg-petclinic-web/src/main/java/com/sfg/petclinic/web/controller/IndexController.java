@@ -21,4 +21,11 @@ public class IndexController {
         log.debug("IndexController: findOwners");
         return "notimplemented";
     }
+    
+    @RequestMapping(path = {"/budget", "/budget/", "budget.html"})
+    public String getBudgetPage() {
+        log.debug("IndexController: getBudgetPage");
+        return "budget";
+    }
+    
 }
