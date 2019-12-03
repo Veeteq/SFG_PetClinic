@@ -31,8 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BudgetDataLoader implements CommandLineRunner {
 
-    private final static Path baseDirectory = Paths.get("C:\\Users\\la289dm\\Downloads\\incomes");
-    //private final static Path baseDirectory = Paths.get("F:");
+    //private final static Path baseDirectory = Paths.get("C:\\Users\\la289dm\\Downloads\\incomes");
+    private final static Path baseDirectory = Paths.get("F:");
 
     private final CategoryService categoryService;
     private final ItemService itemService;

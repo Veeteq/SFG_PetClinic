@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sfg.petclinic.data.model.Expense;
 import com.sfg.petclinic.data.model.Item;
 import com.sfg.petclinic.data.service.ItemService;
 
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BudgetController {
 
     private static final String VIEWS_ITEMS = "budget/items";
+    private static final String VIEWS_FIND_EVENTS = "budget/findEvents";
+    
     private final ItemService itemService;
 
     @Autowired
@@ -42,6 +45,10 @@ public class BudgetController {
     @GetMapping(path = "/events/find")
     public String showFindEventForm(Model model) {
         log.debug("BudgetController: showFindEventForm");
-        return VIEWS_ITEMS;
+        
+        Expense expense = new Expense();
+        model.addAttribute("expense", expense);
+        
+        return VIEWS_FIND_EVENTS;
     }
 }
