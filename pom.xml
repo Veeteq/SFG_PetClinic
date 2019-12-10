@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.sfg.petclinic</groupId>
-	<artifactId>sfg-petclinic</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+    <groupId>com.sfg.petclinic</groupId>
+    <artifactId>sfg-petclinic</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
 
-	<name>PetClinic</name>
-	<description>Pet Clinic for Spring Boot</description>
-	<packaging>pom</packaging>
+    <name>PetClinic</name>
+    <description>Pet Clinic for Spring Boot</description>
+    <packaging>pom</packaging>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
 
 
-	<modules>
-		<module>sfg-petclinic-data</module>
-		<module>sfg-petclinic-web</module>
-	</modules>
+    <modules>
+        <module>sfg-petclinic-data</module>
+        <module>sfg-petclinic-web</module>
+    </modules>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
                     <skip>true</skip>
                 </configuration>
-			</plugin>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -47,12 +47,37 @@
                     <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
-            </plugin>			
-		</plugins>
-	</build>	
-	<scm>
-	    <developerConnection>scm:git:https://github.com/Veeteq/SFG_PetClinic.git</developerConnection>
-	  <tag>pet-clinic-0.0.1</tag>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                    <includes>
+                        <include>**.*IT.java</include>
+                    </includes>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+                    </additionalClasspathElements>
+                    <parallel>none</parallel>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+    <scm>
+        <developerConnection>scm:git:https://github.com/Veeteq/SFG_PetClinic.git</developerConnection>
+      <tag>pet-clinic-0.0.1</tag>
   </scm>
 
 </project>
