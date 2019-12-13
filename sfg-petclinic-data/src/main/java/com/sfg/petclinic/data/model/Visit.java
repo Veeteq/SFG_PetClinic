@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +30,8 @@ public class Visit extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "visit_date")
-    private LocalDate date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate visitDate;
     
     @Column(name = "description")
     private String description;

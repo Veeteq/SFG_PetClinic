@@ -38,7 +38,7 @@ public class VisitController {
     }
 
     @InitBinder("visit")
-    public void initOwnerBinder(WebDataBinder dataBinder) {
+    public void initVisitBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
     }
 

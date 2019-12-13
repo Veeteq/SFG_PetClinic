@@ -138,7 +138,7 @@ public class PetClinicDataLoader implements CommandLineRunner {
         Visit michaelsPetVisit = new Visit();
         michaelsPetVisit.setPet(michaelsPet);
         michaelsPetVisit.setDescription("Broken leg");
-        michaelsPetVisit.setDate(LocalDate.now());
+        michaelsPetVisit.setVisitDate(LocalDate.now());
         visitService.save(michaelsPetVisit);
         
         log.debug("Visit loaded...");

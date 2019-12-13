@@ -95,6 +95,17 @@ class OwnerControllerTest {
         .andExpect(view().name("redirect:/owners/1"))
         .andExpect(model().attributeExists("owner"));
     }
+
+    @Test
+    void testFindOwnersFormSendForNoMatch() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(owners);
+
+        mockMvc.perform(get("/owners")
+                .param("lastName", ""))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/ownersList"))
+        .andExpect(model().attribute("owners", hasSize(2)));
+    }
     
     @Test
     void testShowOwnerById() throws Exception {
