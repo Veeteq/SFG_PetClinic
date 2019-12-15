@@ -11,3 +11,5 @@ mvnw spring-boot:run -Dspring-boot.run.arguments=--debug
 
 # Including Circle CI
 [![CircleCI](https://circleci.com/gh/Veeteq/SFG_PetClinic/tree/master.svg?style=svg)](https://circleci.com/gh/Veeteq/SFG_PetClinic/tree/master)
+
+https://vkuzel.com/add-or-remove-items-from-a-list-of-objects-in-a-model-attribute-using-spring-mvc-and-thymeleaf
