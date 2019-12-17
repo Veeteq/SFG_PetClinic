@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"  th:replace="~{fragments/budget_layout :: layout (~{::body},'owners')}">
+<head>
+    <meta charset="UTF-8">   
+    <title>Create New Owner</title>
+</head>
+
+<body>
+  <h1 th:text="'Create New Event'">Create New Event</h1>
+
+  <form th:object="${financialEvent}" class="form-horizontal" id="add-event-form" method="post">
+    <input type="hidden" name="id" th:value="${financialEvent.id}" />
+    <div class="form-group has-feedback">
+      <div class="form-row">
+        <div class="form-group col-md-4">      
+          <input th:replace="~{fragments/inputField :: input ('Date', 'eventDate', 'date')}" />
+        </div>
+        <div class="form-group col-md-4">
+          <input th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
+        </div>
+        <div class="form-group col-md-4">
+          <input th:replace="~{fragments/inputField :: input ('Counterparty', 'counterparty.name', 'text')}" />
+        </div>
+      </div>
+      
+<table>
+  <thead>
+    <tr>
+      <th th:text="${'Number'}">Col 1</th>
+      <th th:text="${'Title'}">Col 2</th>
+      <th th:text="${'Action'}">Col 3</th>
+      <th>
+        <button type="submit" name="addBook" th:text="${'add row'}">Add row</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="book,rowStat : *{books}">
+      <td><input type="hidden" th:field="*{books[__${rowStat.index}__].id}" /></td>
+      <td th:text="${rowStat.count}">1</td>
+      
+      <td>
+        <input type="text" th:field="*{books[__${rowStat.index}__].name}" />
+      </td>
+      <td>
+        <button type="submit" name="removeRow" th:value="${rowStat.index}" th:text="${'remove'}">Remove row</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+        
+
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button th:with="text=${financialEvent.new} ? 'Add Event' : 'Update Event'" class="btn btn-default" type="submit" th:text="${text}">Add Event</button>
+      </div>
+    </div>
+  </form>
+  
+</body>
+</html>

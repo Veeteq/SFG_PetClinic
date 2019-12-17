@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org"  th:replace="~{fragments/layout :: layout (~{::body},'events')}">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"  th:replace="~{fragments/budget_layout :: layout (~{::body},'events')}">
 <head>
     <meta charset="UTF-8">   
-    <title>Find Owners</title>
+    <title>Find Events</title>
 </head>
 
 <body>
     <h1 th:text="'Find Events'">Find Owners</h1>
     
-    <form th:object="${expense}" th:action="@{/budget/expense}" method="get" class="form-horizontal" id="search-expense-form">
+    <form th:object="${financialEvent}" th:action="@{/budget/events}" method="get" class="form-horizontal" id="search-financialEvent-form">
       <div class="panel-group">
-        <div class="control-group" id="lastNameGroup">
-          <label class="col-sm-2 control-label">Last name </label>
+        <div class="control-group" id="financialEventName">
+          <label class="col-sm-2 control-label">Name </label>
           <div class="col-sm-10">
-            <input class="form-control" th:field="*{comment}" size="30" maxlength="80" />
+            <input class="form-control" th:field="*{name}" size="30" maxlength="80" />
             <!-- span class="help-inline"> -->
               <div class="invalid-feedback" th:if="${#fields.hasAnyErrors()}">
                 <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</p>
@@ -28,6 +28,6 @@
       </div>
     </div>
     </form>
-    <a class="btn btn-default" th:href="@{/owners/new}">Add Event</a>
+    <a class="btn btn-default" th:href="@{/budget/events/new}">Add Event</a>
 </body>
 </html>

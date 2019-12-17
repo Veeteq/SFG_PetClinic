@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/budget_layout :: layout (~{::body},'events')}">
+
+  <body>  
+  
+    <h2>Financial Doc Information</h2>
+    <table class="table table-striped" th:object="${financialEvent}">
+      <tr>
+        <th>Name</th>
+        <td><b th:text="*{name}"></b></td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td th:text="*{eventDate}" /></td>
+      </tr>
+      <tr>
+        <th>Counterparty</th>
+        <td th:text="*{counterparty.name}" /></td>
+      </tr>
+    </table>  
+
+    <a th:href="@{{id}/edit(id=${financialEvent.id})}" class="btn btn-default">Edit Event</a>
+    <a class="btn btn-default add-element">Add Item</a>
+
+    <br/>
+    <br/>
+    <br/>    
+
+    <h2>Elements And Payments</h2>
+
+<table class="table table-striped" th:object="${financialEvent}">
+  <thead>
+    <tr>
+      <th th:text="${'Col 1'}">Col 1</th>
+      <th th:text="${'Col 2'}">Col 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="book,rowStat : *{books}">
+      <td th:text="*{books[__${rowStat.index}__].id}">1</td>
+      <td th:text="*{books[__${rowStat.index}__].name}">Name</td>      
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>

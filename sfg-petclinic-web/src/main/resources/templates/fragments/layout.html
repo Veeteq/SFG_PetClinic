@@ -49,6 +49,11 @@
                       <span>Home</span>
                   </li>
   
+                  <li th:replace="::menuItem ('/budget','budget','budget page','piggy-bank','Budget')">
+                      <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+                      <span>Budget</span>
+                  </li>
+
                   <li th:replace="::menuItem ('/owners/find','owners','find owners','search','Find owners')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find owners</span>

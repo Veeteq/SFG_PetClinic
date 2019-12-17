@@ -44,11 +44,16 @@
                       </a>
                   </li>
   
-                  <li th:replace="::menuItem ('/budget','home','home page','home','Home')">
+                  <li th:replace="::menuItem ('/','home','home page','home','Home')">
                       <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                       <span>Home</span>
                   </li>
   
+                  <li th:replace="::menuItem ('/budget','budget','budget page','piggy-bank','Budget')">
+                      <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+                      <span>Budget</span>
+                  </li>
+
                   <li th:replace="::menuItem ('/budget/events/find','events','find event','search','Find event')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find owners</span>
@@ -88,6 +93,7 @@
   <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
   <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script src="/js/budget.js" type="text/javascript"></script>
 
 </body>
 

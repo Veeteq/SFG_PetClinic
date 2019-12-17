@@ -1,0 +1,40 @@
+package com.sfg.petclinic.data.model;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Entity
+@Table(name = "books")
+@AttributeOverride(name = "id", column = @Column(name = "book_id"))
+@AttributeOverride(name = "name", column = @Column(name = "book_name_tx"))
+@SequenceGenerator(name = "default_seq", sequenceName = "book_seq", allocationSize = 1)
+@Getter
+@Setter
+@NoArgsConstructor
+@SuperBuilder
+public class Book extends NamedEntity implements Comparable<Book> {
+
+    private static final long serialVersionUID = 1L;
+    
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private FinancialEvent event;
+
+    @Override
+    public int compareTo(Book other) {
+        if(other != null) {
+            return this.getId().compareTo(other.getId());
+        }
+        return -1;
+    }
+}
