@@ -23,7 +23,7 @@
         </div>
       </div>
       
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th th:text="${'Number'}">Col 1</th>
@@ -35,16 +35,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr th:each="book,rowStat : *{books}">
+    <tr th:each="book,rowStat : *{books}">      
+      <td th:text="${rowStat.count}">1</td>      
+      <td><input type="text" th:field="*{books[__${rowStat.index}__].name}" /></td>
+      <td><button type="submit" name="removeRow" th:value="${rowStat.index}" th:text="${'remove'}">Remove row</button></td>
       <td><input type="hidden" th:field="*{books[__${rowStat.index}__].id}" /></td>
-      <td th:text="${rowStat.count}">1</td>
-      
-      <td>
-        <input type="text" th:field="*{books[__${rowStat.index}__].name}" />
-      </td>
-      <td>
-        <button type="submit" name="removeRow" th:value="${rowStat.index}" th:text="${'remove'}">Remove row</button>
-      </td>
     </tr>
   </tbody>
 </table>
