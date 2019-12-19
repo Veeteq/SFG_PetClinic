@@ -4,18 +4,18 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.mockito.ArgumentMatchers.any;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -73,7 +73,8 @@ class OwnerControllerTest {
         .andExpect(view().name("owners/findOwners"))
         .andExpect(model().attributeExists("owner"));
 
-        verifyZeroInteractions(ownerService);
+        verify(ownerService, never()).save(any(Owner.class));
+        verify(ownerService, never()).findAll();
     }
 
     @Test
@@ -129,7 +130,8 @@ class OwnerControllerTest {
         .andExpect(model().attributeExists("owner"))
         .andExpect(model().attribute("owner", instanceOf(Owner.class)));
         
-        verifyZeroInteractions(ownerService);
+        verify(ownerService, never()).save(any(Owner.class));
+        verify(ownerService, never()).findAll();
     }
 
     @Test

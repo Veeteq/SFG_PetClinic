@@ -39,6 +39,10 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
 
     @Override
     public Pet findByName(String name) {
-        return null;
+        return super.findAll()
+                .stream()
+                .filter(pet -> pet.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 }
