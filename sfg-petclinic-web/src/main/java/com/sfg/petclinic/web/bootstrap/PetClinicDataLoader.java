@@ -123,6 +123,7 @@ public class PetClinicDataLoader implements CommandLineRunner {
         .build();
         System.out.println("getFirstName: " + vet1.getFirstName());
         vet1.getSpecialities().add(radiology);
+        vet1.getSpecialities().add(dentistry);
         vetService.save(vet1);
         
         Vet vet2 = Vet.builder()
@@ -132,7 +133,14 @@ public class PetClinicDataLoader implements CommandLineRunner {
         .build();
         vet2.getSpecialities().add(surgery);
         vetService.save(vet2);
-        
+
+        Vet vet3 = Vet.builder()
+                .firstName("Janet")
+                .lastName("Jackson")
+                .specialities(new HashSet<>())
+                .build();                
+                vetService.save(vet3);
+                
         log.debug("Vets loaded...");
         
         Visit michaelsPetVisit = new Visit();
